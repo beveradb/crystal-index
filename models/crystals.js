@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
 
-  const crystal = sequelize.define('crystal', {
+  const crystals = sequelize.define('crystals', {
     name: DataTypes.STRING,
     bio: DataTypes.STRING,
     image: DataTypes.STRING,
@@ -12,19 +12,17 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: new Date(),
   });
 
-  // crystal.associate = function(models) {
-  //   crystal.belongsToMany(models.User, {
-  //     through: 'favourites',
-  //     foreignKey: 'id',
-  //     as: 'userId',
-  //   });
-  //   crystal.hasOne(models.User, { 
-  //     foreignKey: 'id', 
-  //     as: 'createdBy',
-  //   });
-  // };
+  crystals.associate = (models) => {
+    crystals.belongsTo(models.users, { foreignKey: 'id', as: 'createdBy' });
+    
+    // crystals.belongsToMany(models.User, {
+    //   through: 'favourites',
+    //   foreignKey: 'id',
+    //   as: 'userId',
+    // });
+  };
 
   // node_modules/.bin/sequelize model:generate --name users_crystals --attributes userId:integer,crystalId:integer
 
-  return crystal;
+  return crystals;
 };
