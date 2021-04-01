@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   // Example of belongsTo association
   // This is commented because we don't need this
-  userDetails.associate = (models) => {
-    userDetails.belongsTo(models.users, { foreignKey: 'id', as: 'users' });
-  }
+  // userDetails.associate = (models) => {
+  //   userDetails.belongsTo(models.users, { foreignKey: 'id', as: 'users' });
+  // }
 
   return userDetails;
 };
