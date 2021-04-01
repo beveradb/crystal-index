@@ -9,12 +9,11 @@ module.exports = (sequelize, DataTypes) => {
 })
 
   users.associate = (models) => {
+    // 1:1
     users.hasOne(models.userDetails, { foreignKey: 'id', as: 'userDetails', onDelete: 'CASCADE' });
-
-    // users.hasMany(models.Crystal, {
-    //   foreignKey: 'crystalId',
-    //   as: 'createdBy',
-    // });
+    // 1:n
+    users.hasMany(models.crystals, { foreignKey: 'createdBy', as: 'createdCrystals' });
+    
     // users.belongsToMany(models.Crystal, {
     //   through: 'favourites',
     //   foreignKey: 'userId',

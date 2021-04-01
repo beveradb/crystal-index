@@ -5,7 +5,7 @@ module.exports = [{
   path: '/users',
   handler: async (req, h) => {
     const {
-      userName, email, password, firstName, lastName, mobileNum, address,
+      userName, email, password, firstName, lastName, mobileNum, address, createdCrystals,
     } = req.payload;
     try {
       const results = await db.users.create({
@@ -17,13 +17,18 @@ module.exports = [{
           lastName,
           mobileNum,
           address,
-        }
-      }, {
-        include: [{
-          model: db.userDetails,
-          as: 'userDetails',
-        }],
-
+        },
+        createdCrystals,
+        include: [
+          {
+            model: db.userDetails,
+            as: 'userDetails',
+          },
+          {
+            model: db.crystals,
+            as: 'createdCrystals',
+          },
+        ],
       });
       return {
         success: true,
@@ -45,6 +50,9 @@ module.exports = [{
         include: [{
           model: db.userDetails,
           as: 'userDetails',
+        }, {
+          model: db.crystals,
+          as: 'createdCrystals',
         }],
       });
       return results;
@@ -64,6 +72,9 @@ module.exports = [{
         include: [{
           model: db.userDetails,
           as: 'userDetails',
+        }, {
+          model: db.crystals,
+          as: 'createdCrystals',
         }],
       });
       return results;
