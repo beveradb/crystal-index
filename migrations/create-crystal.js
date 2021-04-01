@@ -20,7 +20,7 @@ module.exports = {
       otherNames: {
         type: Sequelize.STRING
       },
-      colours: {
+      colour: {
         type: Sequelize.ARRAY(Sequelize.INTEGER),
       },
       chakra: {
@@ -35,10 +35,11 @@ module.exports = {
         type: Sequelize.DATE
       },
       createdBy: {
-        allowNull: false,
+        // allowNull: false,
         type: Sequelize.INTEGER,
-        // references: { model: 'User', key: 'id' },
-        // onDelete: 'CASCADE',
+
+        references: { model: 'users', key: 'id' },
+        onDelete: 'CASCADE',
       },
     });
   },
